@@ -1,0 +1,25 @@
+{
+  "name": "wallpaper-code-generator",
+  "version": "0.1.0",
+  "description": "A wallpaper generator that uses code as content and allows for customization.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "generator",
+    "wallpaper"
+  ],
+  "author": "Nikolay Ivanov",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "github-fork-ribbon-css": "^0.2.3",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "gulp": "^4.0.2",
+    "gulp-stylus": "^2.7.0"
+  }
+}

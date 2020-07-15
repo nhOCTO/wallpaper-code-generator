@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallpaper Generator</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/build/main.css">
+    <link rel="stylesheet" href="node_modules/github-fork-ribbon-css/gh-fork-ribbon.css">
+</head>
+<body>
+    <a class="github-fork-ribbon" href="http://github.com/Super-Lovers/wallpaper-code-generator" data-ribbon="Contribute on GitHub" title="Contribute on GitHub">Contribute on GitHub</a>
+    
+    <div class="wallpaper-container">
+        <p class="wallpaper-code"></p>
+    </div>
+    
+    <div class="container ui-container">
+        <div class="row">
+            <div class="col-3 configuration">
+                <h2>Configuration</h2>
+                <div class="form-group">
+                    <label for="toggleWhitespace" title="Enables or disables characters such as spaces and tabs">Whitespace:</label>
+                    <input class="form-check-input position-static" type="checkbox" id="toggleWhitespace">
+                </div>
+                
+                <div class="form-group">
+                    <label for="backgroundColor">Background color:</label>
+                    <input type="text" class="form-control" id="backgroundColor" placeholder="#FFFFFF">
+                </div>
+            </div>
+            
+            <div class="col-9 code-container">
+                <h2>Code</h2>
+                <div class="row code-configuration">
+                    <div class="dropdown dropdown-code-theme">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Theme
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Theme 1</a>
+                            <a class="dropdown-item" href="#">Theme 2</a>
+                            <a class="dropdown-item" href="#">Theme 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown dropdown-language">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Language
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Language 1</a>
+                            <a class="dropdown-item" href="#">Language 2</a>
+                            <a class="dropdown-item" href="#">Language 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown dropdown-code-font">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Font
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Font 1</a>
+                            <a class="dropdown-item" href="#">Font 2</a>
+                            <a class="dropdown-item" href="#">Font 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown dropdown-fontSize">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Font Size
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Font Size 1</a>
+                            <a class="dropdown-item" href="#">Font Size 2</a>
+                            <a class="dropdown-item" href="#">Font Size 3</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row code">
+                    <textarea class="form-control" rows="5" placeholder="Place your wallpaper code in this area"></textarea>
+                </div>
+
+                <div class="row footer">
+                    <button type="button" class="btn btn-primary generate-button">Generate</button>
+                    <button type="button" class="btn btn-primary download-button">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="libs/popper.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
