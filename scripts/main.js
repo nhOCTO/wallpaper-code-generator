@@ -30,7 +30,7 @@ downloadButton.addEventListener('click', () => {
 			const image = canvas.toDataURL('image/png');
 
 			const a = document.createElement('a');
-			a.setAttribute('download', 'myImage.png');
+			a.setAttribute('download', 'wallpaper.png');
 			a.setAttribute('href', image);
 			a.click();
 			canvas.remove();
