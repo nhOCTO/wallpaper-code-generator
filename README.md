@@ -4,11 +4,11 @@
 </p>
 
 <h3 align="center">Code Wallpaper Generator</h3>
-
 ## 📝 Table of Contents
 
 * [About](#about)
 * [Getting Started](#getting-started)
+* [Credits](#credits)
 * [Contribution](#contribution)
 
 
@@ -30,6 +30,12 @@ After you have code in the text area, you will then be able to change its behavi
 ![](images/focus.gif)
 
 When you're done tweaking the wallpaper to your liking, simply click the download button and the image will be downloaded onto your device.
+
+## ❤️ Credits <a name = "credits"></a>
+
+Thanks to https://www.programmingfonts.org/ I was able to find a good number of fonts that you can use for programming code. I didn't want google fonts since they don't all match code.
+
+Thanks to [https://highlightjs.org/](https://highlightjs.org/) for providing themes for code and also syntax highlighting, which this application would not have been possible without unless I spent a lot of time doing that myself.
 
 ## 🎁 Contribution <a name = "contribution"></a>
 
