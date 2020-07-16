@@ -4,6 +4,7 @@
 </p>
 
 <h3 align="center">Code Wallpaper Generator</h3>
+
 ## 📝 Table of Contents
 
 * [About](#about)
@@ -22,13 +23,16 @@ This application lets you create a wallpaper based on code you give it and by ma
 
 First clone the application:
 
-``$ git clone https://github.com/Super-Lovers/wallpaper-code-generator``
-
-``$ cd wallpaper-code-generator/``
+````
+$ git clone https://github.com/Super-Lovers/wallpaper-code-generator
+$ cd wallpaper-code-generator/
+````
 
 Now install the node modules:
 
-``$ npm install``
+````
+$ npm install
+````
 
 Once that is done, you can open the **index.html** file to start!
 
