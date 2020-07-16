@@ -4,7 +4,6 @@
 </p>
 
 <h3 align="center">Code Wallpaper Generator</h3>
-
 ## 📝 Table of Contents
 
 * [About](#about)
@@ -18,6 +17,8 @@
 ## 🧐 About <a name = "about"></a>
 
 This application lets you create a wallpaper based on code you give it and by manipulating different parameters that change how the text and background looks. You can pick from all sorts of themes and fonts for your code and tweak the wallpaper until you're satisfied.
+
+![](images/preview.png)
 
 ## 🏁 Getting Started <a name = "getting-started"></a>
 
