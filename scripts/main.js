@@ -77,6 +77,7 @@ toggleWhitespace.addEventListener('change', (event) => {
 	}
 
 	code.innerHTML = codeText;
+	hljs.highlightBlock(code);
 });
 
 backgroundColor.addEventListener('input', () => {
@@ -244,11 +245,14 @@ $(window).resize(function() {
 
 textarea.addEventListener('change', () => {
 	let textAreaCode = textarea.value;
-	codeWithoutWhitespace = textAreaCode;
-	textAreaCode = textAreaCode.split(' ').join('<i class="fas fa-circle"></i>');
-	codeWithWhitespace = textAreaCode;
 	code.innerHTML = textAreaCode;
 	hljs.highlightBlock(code);
+	codeWithoutWhitespace = code.innerHTML;
+
+	textAreaCode = textAreaCode.split(' ').join('<i class="fas fa-circle"></i>');
+	code.innerHTML = textAreaCode;
+	hljs.highlightBlock(code);
+	codeWithWhitespace = code.innerHTML;
 
 	pre = document.getElementsByClassName('hljs')[0];
 	pre.style.background = 'rgba(255, 255, 255, 0)';
