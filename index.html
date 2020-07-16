@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="node_modules/github-fork-ribbon-css/gh-fork-ribbon.css">
 </head>
 <body>
+    <a class="github-fork-ribbon" href="https://github.com/Super-Lovers/wallpaper-code-generator" data-ribbon="Contribute on GitHub" title="Contribute on GitHub">Contribute on GitHub</a>
+
     <div class="wallpaper-container">
         <pre class="wallpaper-code"></pre>
     </div>
     
     <div class="container ui-container">
-        <a class="github-fork-ribbon" href="https://github.com/Super-Lovers/wallpaper-code-generator" data-ribbon="Contribute on GitHub" title="Contribute on GitHub">Contribute on GitHub</a>
-
+        <div class="alert alert-primary" role="alert">
+            For the best experience, <b>please enter full-screen mode</b> in your browser. The application uses your screen size, so if your browser window is smaller it won't be easy to see your wallpaper!
+          </div>
         <div class="row">
             <div class="col-3 configuration">
                 <h2>Configuration</h2>
+                <hr>
                 <div class="form-group">
                     <label for="toggleWhitespace" title="Enables or disables characters such as spaces and tabs">Whitespace:</label>
                     <input class="form-check-input position-static" type="checkbox" id="toggleWhitespace">
@@ -52,6 +56,7 @@
             
             <div class="col-9 code-container">
                 <h2>Code</h2>
+                <hr>
                 <div class="row code-configuration">
                     <div class="dropdown dropdown-code-theme">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -114,7 +119,7 @@
                     </div>
                 </div>
                 <div class="row code">
-                    <textarea class="form-control" rows="8" placeholder="Place your wallpaper code in this area">test</textarea>
+                    <textarea class="form-control" rows="8" placeholder="Place your wallpaper code in this text area"></textarea>
                 </div>
 
                 <div class="row footer">
