@@ -13,6 +13,7 @@
   "author": "Nikolay Ivanov",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "bootstrap": "^4.5.0",
     "github-fork-ribbon-css": "^0.2.3",
     "highlight.js": "^10.1.1",

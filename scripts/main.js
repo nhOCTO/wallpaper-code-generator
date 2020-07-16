@@ -21,7 +21,6 @@ downloadButton.addEventListener('click', () => {
 		height: window.screen.height,
 	})
 		.then(canvas => {
-			// TODO: Set the size of the image to the monitor of the user
 			document.body.appendChild(canvas);
 		})
 		.then(() => {
@@ -42,7 +41,6 @@ downloadButton.addEventListener('click', () => {
 // ******************************
 // UI interactions
 // ******************************
-
 wallpaper.addEventListener('mouseover', () => {
 	ui.style.opacity = notFocusedValue;
 	wallpaper.style.opacity = focusedValue;
@@ -91,11 +89,39 @@ codePadding.addEventListener('input', () => {
 // ******************************
 // Code
 // ******************************
+const boldButton = document.getElementsByClassName('fa-bold')[0];
+const italicButton = document.getElementsByClassName('fa-italic')[0];
+
+boldButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	toggleCodeStyles();
+});
+italicButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	toggleCodeStyles();
+});
+
+function toggleCodeStyles() {
+	if (boldButton.classList.contains('active')) {
+		code.style.fontWeight = 'bold';
+	} else {
+		code.style.fontWeight = 'normal';
+	}
+
+	if (italicButton.classList.contains('active')) {
+		code.style.fontStyle = 'italic';
+	} else {
+		code.style.fontStyle = 'normal';
+	}
+}
+
 let currentFont;
 $(document).ready(function() {
 	$('.dropdown-item.font').on('click', function() {
 		currentFont = this.textContent;
 		code.style.fontFamily = this.textContent;
+
+		toggleCodeStyles();
 	});
 
 	$('.dropdown-item.font-size').on('click', function() {
@@ -205,6 +231,8 @@ textarea.addEventListener('change', () => {
 
 	if (currentFont != undefined) {
 		code.style.fontFamily = currentFont;
+
+		toggleCodeStyles();
 	}
 });
 
