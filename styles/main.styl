@@ -15,6 +15,7 @@ h2
     font-size 1.2em
 
 label
+    margin-bottom: 2px
     font-size 0.8em
 
 .alert
@@ -73,6 +74,9 @@ input.form-control
     height 30px
     line-height 30px
 
+input[type="text"]
+    font-size 0.9em
+
 input::placeholder
     font-size 0.8em
 
@@ -86,7 +90,6 @@ input::placeholder
 // ******************************
 // Code panel
 // ******************************
-
 .code-container .row
     margin-bottom 5px
 
@@ -96,10 +99,15 @@ input::placeholder
 .dropdown-toggle
     font-size 0.8em
 
-textarea
+.dropdown-menu
+    height 200px
+    overflow-y scroll
+
+textarea.form-control
     margin-top 5px
     margin-bottom: 5px
     width 100%
-
-textarea::placeholder
     font-size 0.8em
+
+textarea.form-control::placeholder
+    font-size 1em

@@ -91,7 +91,13 @@ codePadding.addEventListener('input', () => {
 // ******************************
 // Code
 // ******************************
+let currentFont;
 $(document).ready(function() {
+	$('.dropdown-item.font').on('click', function() {
+		currentFont = this.textContent;
+		code.style.fontFamily = this.textContent;
+	});
+
 	$('.dropdown-item.font-size').on('click', function() {
 		pre.style.fontSize = this.textContent;
 	});
@@ -188,14 +194,18 @@ $(window).resize(function() {
 	repositionWallpaper();
 });
 
-textarea.addEventListener('input', () => {
+textarea.addEventListener('change', () => {
 	const textAreaCode = textarea.value;
 	code.textContent = textAreaCode;
-	hljs.highlightBlock(code.parentNode);
+	hljs.highlightBlock(code);
 
 	pre = document.getElementsByClassName('hljs')[0];
 	pre.style.background = 'rgba(255, 255, 255, 0)';
 	toggleDropdowns(true);
+
+	if (currentFont != undefined) {
+		code.style.fontFamily = currentFont;
+	}
 });
 
 function toggleDropdowns(toggle) {
