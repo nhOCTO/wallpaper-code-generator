@@ -4,6 +4,7 @@
 </p>
 
 <h3 align="center">Code Wallpaper Generator</h3>
+
 ## 📝 Table of Contents
 
 * [About](#about)
