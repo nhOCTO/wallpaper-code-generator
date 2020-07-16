@@ -89,7 +89,11 @@ codePadding.addEventListener('input', () => {
 // Code
 // ******************************
 $(document).ready(function() {
-	$('.dropdown-item').on('click', function() {
+	$('.dropdown-item.font-size').on('click', function() {
+		pre.style.fontSize = this.textContent;
+	});
+
+	$('.dropdown-item.code-position').on('click', function() {
 		const position = this.textContent;
 
 		pre.style.position = 'absolute';
