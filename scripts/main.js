@@ -4,6 +4,7 @@ const ui = document.getElementsByClassName('ui-container')[0];
 const textarea = document.getElementsByTagName('textarea')[0];
 let pre;
 const code = document.getElementsByClassName('wallpaper-code')[0];
+const codeTheme = document.getElementsByClassName('code-theme')[0];
 const downloadButton = document.getElementsByClassName('download-button')[0];
 const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
 
@@ -60,6 +61,23 @@ const codeWidth = document.getElementById('codeWidth');
 const lineHeight = document.getElementById('lineHeight');
 const letterSpacing = document.getElementById('letterSpacing');
 const codePadding = document.getElementById('codePadding');
+const toggleWhitespace = document.getElementById('toggleWhitespace');
+toggleWhitespace.checked = true;
+
+let codeWithoutWhitespace;
+let codeWithWhitespace;
+
+toggleWhitespace.addEventListener('change', (event) => {
+	let codeText = code.innerHTML;
+
+	if (event.target.checked) {
+		codeText = codeWithWhitespace;
+	} else {
+		codeText = codeWithoutWhitespace;
+	}
+
+	code.innerHTML = codeText;
+});
 
 backgroundColor.addEventListener('input', () => {
 	const hex = backgroundColor.value;
@@ -117,6 +135,10 @@ function toggleCodeStyles() {
 
 let currentFont;
 $(document).ready(function() {
+	$('.dropdown-item.theme').on('click', function() {
+		codeTheme.href = 'themes/' + this.textContent + '.css';
+	});
+
 	$('.dropdown-item.font').on('click', function() {
 		currentFont = this.textContent;
 		code.style.fontFamily = this.textContent;
@@ -221,8 +243,11 @@ $(window).resize(function() {
 });
 
 textarea.addEventListener('change', () => {
-	const textAreaCode = textarea.value;
-	code.textContent = textAreaCode;
+	let textAreaCode = textarea.value;
+	codeWithoutWhitespace = textAreaCode;
+	textAreaCode = textAreaCode.split(' ').join('<i class="fas fa-circle"></i>');
+	codeWithWhitespace = textAreaCode;
+	code.innerHTML = textAreaCode;
 	hljs.highlightBlock(code);
 
 	pre = document.getElementsByClassName('hljs')[0];
