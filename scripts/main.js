@@ -2,13 +2,16 @@
 const wallpaper = document.getElementsByClassName('wallpaper-container')[0];
 const ui = document.getElementsByClassName('ui-container')[0];
 const textarea = document.getElementsByTagName('textarea')[0];
-const pre = document.getElementsByClassName('wallpaper-code')[0];
+let pre;
+const code = document.getElementsByClassName('wallpaper-code')[0];
 const downloadButton = document.getElementsByClassName('download-button')[0];
+const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
 
 const focusedValue = 1;
 const notFocusedValue = 0.3;
 
 repositionWallpaper();
+toggleDropdowns(false);
 
 downloadButton.addEventListener('click', () => {
 	wallpaper.style.opacity = focusedValue;
@@ -186,6 +189,19 @@ $(window).resize(function() {
 });
 
 textarea.addEventListener('input', () => {
-	const code = textarea.value;
-	pre.textContent = code;
+	const textAreaCode = textarea.value;
+	code.textContent = textAreaCode;
+	hljs.highlightBlock(code.parentNode);
+
+	pre = document.getElementsByClassName('hljs')[0];
+	pre.style.background = 'rgba(255, 255, 255, 0)';
+	toggleDropdowns(true);
 });
+
+function toggleDropdowns(toggle) {
+	for (let i = 0; i < dropdownButtons.length; i++) {
+		const button = dropdownButtons[i];
+
+		button.disabled = !toggle;
+	}
+}
