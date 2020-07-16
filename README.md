@@ -4,11 +4,11 @@
 </p>
 
 <h3 align="center">Code Wallpaper Generator</h3>
-
 ## 📝 Table of Contents
 
 * [About](#about)
 * [Getting Started](#getting-started)
+* [Usage](#usage)
 * [Credits](#credits)
 * [Contribution](#contribution)
 
@@ -18,9 +18,21 @@
 
 This application lets you create a wallpaper based on code you give it and by manipulating different parameters that change how the text and background looks. You can pick from all sorts of themes and fonts for your code and tweak the wallpaper until you're satisfied.
 
-
-
 ## 🏁 Getting Started <a name = "getting-started"></a>
+
+First clone the application:
+
+``$ git clone https://github.com/Super-Lovers/wallpaper-code-generator``
+
+``$ cd wallpaper-code-generator/``
+
+Now install the node modules:
+
+``$ npm install``
+
+Once that is done, you can open the **index.html** file to start!
+
+## 🎈 Usage <a name = "usage"></a>
 
 To use the application, you first paste a block of code in the text area, and then set the width of the code block from the interface panel on the left. Without setting the width of the block, you won't be able to position it in different places on the screen.
 
