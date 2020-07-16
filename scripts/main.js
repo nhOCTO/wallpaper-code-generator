@@ -3,13 +3,42 @@ const wallpaper = document.getElementsByClassName('wallpaper-container')[0];
 const ui = document.getElementsByClassName('ui-container')[0];
 const textarea = document.getElementsByTagName('textarea')[0];
 const pre = document.getElementsByClassName('wallpaper-code')[0];
+const downloadButton = document.getElementsByClassName('download-button')[0];
 
+const focusedValue = 1;
+const notFocusedValue = 0.3;
+
+repositionWallpaper();
+
+downloadButton.addEventListener('click', () => {
+	wallpaper.style.opacity = focusedValue;
+
+	html2canvas(wallpaper, {
+		width: window.screen.width,
+		height: window.screen.height,
+	})
+		.then(canvas => {
+			// TODO: Set the size of the image to the monitor of the user
+			document.body.appendChild(canvas);
+		})
+		.then(() => {
+			const canvas = document.getElementsByTagName('canvas')[0];
+			canvas.style.display = 'none';
+			const image = canvas.toDataURL('image/png');
+
+			const a = document.createElement('a');
+			a.setAttribute('download', 'myImage.png');
+			a.setAttribute('href', image);
+			a.click();
+			canvas.remove();
+
+			wallpaper.style.opacity = notFocusedValue;
+		});
+});
 
 // ******************************
 // UI interactions
 // ******************************
-const focusedValue = 1;
-const notFocusedValue = 0.3;
 
 wallpaper.addEventListener('mouseover', () => {
 	ui.style.opacity = notFocusedValue;
@@ -139,6 +168,17 @@ $(document).ready(function() {
 			break;
 		}
 	});
+});
+
+function repositionWallpaper() {
+	wallpaper.style.width = window.screen.width + 'px';
+	wallpaper.style.height = window.screen.height + 'px';
+}
+
+// Whenever the window resizes it will reposition the wallpaper's
+// configuration to be relative to the new window size
+$(window).resize(function() {
+	repositionWallpaper();
 });
 
 textarea.addEventListener('input', () => {
