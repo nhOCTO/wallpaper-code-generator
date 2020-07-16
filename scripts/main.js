@@ -1,0 +1,147 @@
+/* eslint-disable no-undef */
+const wallpaper = document.getElementsByClassName('wallpaper-container')[0];
+const ui = document.getElementsByClassName('ui-container')[0];
+const textarea = document.getElementsByTagName('textarea')[0];
+const pre = document.getElementsByClassName('wallpaper-code')[0];
+
+
+// ******************************
+// UI interactions
+// ******************************
+const focusedValue = 1;
+const notFocusedValue = 0.3;
+
+wallpaper.addEventListener('mouseover', () => {
+	ui.style.opacity = notFocusedValue;
+	wallpaper.style.opacity = focusedValue;
+});
+
+wallpaper.addEventListener('mouseleave', () => {
+	ui.style.opacity = focusedValue;
+	wallpaper.style.opacity = notFocusedValue;
+});
+
+
+// ******************************
+// Configuration panel references
+// ******************************
+const backgroundColor = document.getElementById('backgroundColor');
+const codeWidth = document.getElementById('codeWidth');
+const lineHeight = document.getElementById('lineHeight');
+const letterSpacing = document.getElementById('letterSpacing');
+const codePadding = document.getElementById('codePadding');
+
+backgroundColor.addEventListener('input', () => {
+	const hex = backgroundColor.value;
+	wallpaper.style.backgroundColor = hex;
+});
+
+codeWidth.addEventListener('input', () => {
+	const pixels = codeWidth.value;
+	pre.style.width = pixels + 'px';
+});
+
+lineHeight.addEventListener('input', () => {
+	const pixels = lineHeight.value;
+	pre.style.lineHeight = pixels + 'px';
+});
+
+letterSpacing.addEventListener('input', () => {
+	const pixels = letterSpacing.value;
+	pre.style.letterSpacing = pixels + 'px';
+});
+
+codePadding.addEventListener('input', () => {
+	const pixels = codePadding.value;
+	pre.style.padding = pixels + 'px';
+});
+
+// ******************************
+// Code
+// ******************************
+$(document).ready(function() {
+	$('.dropdown-item').on('click', function() {
+		const position = this.textContent;
+
+		pre.style.position = 'absolute';
+		switch(position) {
+		case 'Middle':
+			pre.style.removeProperty('bottom');
+			pre.style.top = '50%';
+			pre.style.transform = 'translateY(-50%)';
+			pre.style.left = '0';
+			pre.style.right = '0';
+			pre.style.margin = '0 auto';
+			break;
+		case 'Middle Left':
+			pre.style.removeProperty('bottom');
+			pre.style.removeProperty('right');
+			pre.style.top = '50%';
+			pre.style.transform = 'translateY(-50%)';
+			pre.style.left = '0';
+			pre.style.margin = '0 auto';
+			break;
+		case 'Middle Right':
+			pre.style.removeProperty('bottom');
+			pre.style.removeProperty('left');
+			pre.style.top = '50%';
+			pre.style.transform = 'translateY(-50%)';
+			pre.style.right = '0';
+			pre.style.margin = '0 auto';
+			break;
+		case 'Middle Top':
+			pre.style.removeProperty('bottom');
+			pre.style.removeProperty('transform');
+			pre.style.paddingTop = '0';
+			pre.style.top = codePadding.value + 'px';
+			pre.style.left = '0';
+			pre.style.right = '0';
+			pre.style.margin = '0 auto';
+			break;
+		case 'Middle Bottom':
+			pre.style.removeProperty('top');
+			pre.style.removeProperty('transform');
+			pre.style.top = '00';
+			pre.style.bottom = '0';
+			pre.style.left = '0';
+			pre.style.right = '0';
+			pre.style.margin = '0 auto';
+			break;
+		case 'Top Left':
+			pre.style.removeProperty('right');
+			pre.style.removeProperty('bottom');
+			pre.style.removeProperty('transform');
+			pre.style.paddingTop = '0';
+			pre.style.top = codePadding.value + 'px';
+			pre.style.left = '0';
+			break;
+		case 'Top Right':
+			pre.style.removeProperty('left');
+			pre.style.removeProperty('bottom');
+			pre.style.removeProperty('transform');
+			pre.style.paddingTop = '0';
+			pre.style.top = codePadding.value + 'px';
+			pre.style.right = '0';
+			break;
+		case 'Bottom Right':
+			pre.style.removeProperty('left');
+			pre.style.removeProperty('top');
+			pre.style.removeProperty('transform');
+			pre.style.bottom = '0';
+			pre.style.right = '0';
+			break;
+		case 'Bottom Left':
+			pre.style.removeProperty('right');
+			pre.style.removeProperty('top');
+			pre.style.removeProperty('transform');
+			pre.style.bottom = '0';
+			pre.style.left = '0';
+			break;
+		}
+	});
+});
+
+textarea.addEventListener('input', () => {
+	const code = textarea.value;
+	pre.textContent = code;
+});

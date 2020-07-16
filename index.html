@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="node_modules/github-fork-ribbon-css/gh-fork-ribbon.css">
 </head>
 <body>
-    <a class="github-fork-ribbon" href="http://github.com/Super-Lovers/wallpaper-code-generator" data-ribbon="Contribute on GitHub" title="Contribute on GitHub">Contribute on GitHub</a>
-    
     <div class="wallpaper-container">
-        <p class="wallpaper-code"></p>
+        <pre class="wallpaper-code"></pre>
     </div>
     
     <div class="container ui-container">
+        <a class="github-fork-ribbon" href="https://github.com/Super-Lovers/wallpaper-code-generator" data-ribbon="Contribute on GitHub" title="Contribute on GitHub">Contribute on GitHub</a>
+
         <div class="row">
             <div class="col-3 configuration">
                 <h2>Configuration</h2>
@@ -26,7 +26,27 @@
                 
                 <div class="form-group">
                     <label for="backgroundColor">Background color:</label>
-                    <input type="text" class="form-control" id="backgroundColor" placeholder="#FFFFFF">
+                    <input type="text" class="form-control " id="backgroundColor" placeholder="#FFFFFF">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codeWidth">Code width <b>(px)</b>:</label>
+                    <input type="text" class="form-control codeWidth" id="codeWidth" placeholder="300">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lineHeight">Line height <b>(px)</b>:</label>
+                    <input type="text" class="form-control lineHeight" id="lineHeight" placeholder="20">
+                </div>
+                
+                <div class="form-group">
+                    <label for="letterSpacing">Letter spacing <b>(px)</b>:</label>
+                    <input type="text" class="form-control letterSpacing" id="letterSpacing" placeholder="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codePadding">Code padding <b>(px)</b>:</label>
+                    <input type="text" class="form-control codePadding" id="codePadding" placeholder="0">
                 </div>
             </div>
             
@@ -63,6 +83,8 @@
                             <a class="dropdown-item" href="#">Font 3</a>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="dropdown dropdown-fontSize">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
                             Font Size
@@ -73,10 +95,26 @@
                             <a class="dropdown-item" href="#">Font Size 3</a>
                         </div>
                     </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-code-position" type="button" data-toggle="dropdown">
+                            Position
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Middle</a>
+                            <a class="dropdown-item" href="#">Middle Top</a>
+                            <a class="dropdown-item" href="#">Middle Bottom</a>
+                            <a class="dropdown-item" href="#">Middle Right</a>
+                            <a class="dropdown-item" href="#">Middle Left</a>
+                            <a class="dropdown-item" href="#">Top Left</a>
+                            <a class="dropdown-item" href="#">Top Right</a>
+                            <a class="dropdown-item" href="#">Bottom Left</a>
+                            <a class="dropdown-item" href="#">Bottom Right</a>
+                        </div>
+                    </div>
                 </div>
-                
                 <div class="row code">
-                    <textarea class="form-control" rows="5" placeholder="Place your wallpaper code in this area"></textarea>
+                    <textarea class="form-control" rows="8" placeholder="Place your wallpaper code in this area">test</textarea>
                 </div>
 
                 <div class="row footer">
