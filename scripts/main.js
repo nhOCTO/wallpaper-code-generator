@@ -154,79 +154,85 @@ $(document).ready(function() {
 	$('.dropdown-item.code-position').on('click', function() {
 		const position = this.textContent;
 
-		pre.style.position = 'absolute';
+		code.style.position = 'absolute';
+		const codeHeightString = getComputedStyle(code).height;
+		const codeHeight = codeHeightString.substring(0, codeHeightString.length - 2);
+
 		switch(position) {
 		case 'Middle':
-			pre.style.removeProperty('bottom');
-			pre.style.top = '50%';
-			pre.style.transform = 'translateY(-50%)';
-			pre.style.left = '0';
-			pre.style.right = '0';
-			pre.style.margin = '0 auto';
+			code.style.removeProperty('bottom');
+			code.style.top = '50%';
+			code.style.transform = 'translateY(-50%)';
+			code.style.left = '0';
+			code.style.right = '0';
+			code.style.margin = '0 auto';
 			break;
 		case 'Middle Left':
-			pre.style.removeProperty('bottom');
-			pre.style.removeProperty('right');
-			pre.style.top = '50%';
-			pre.style.transform = 'translateY(-50%)';
-			pre.style.left = '0';
-			pre.style.margin = '0 auto';
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('right');
+			code.style.top = '50%';
+			code.style.transform = 'translateY(-50%)';
+			code.style.left = ((codePadding.value) ? codePadding.value : 0) + 'px';
+			code.style.margin = '0 auto';
 			break;
 		case 'Middle Right':
-			pre.style.removeProperty('bottom');
-			pre.style.removeProperty('left');
-			pre.style.top = '50%';
-			pre.style.transform = 'translateY(-50%)';
-			pre.style.right = '0';
-			pre.style.margin = '0 auto';
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('left');
+			code.style.top = '50%';
+			code.style.transform = 'translateY(-50%)';
+			code.style.right = ((codePadding.value) ? codePadding.value : 0) + 'px';
+			code.style.margin = '0 auto';
 			break;
 		case 'Middle Top':
-			pre.style.removeProperty('bottom');
-			pre.style.removeProperty('transform');
-			pre.style.paddingTop = '0';
-			pre.style.top = codePadding.value + 'px';
-			pre.style.left = '0';
-			pre.style.right = '0';
-			pre.style.margin = '0 auto';
+			code.style.removeProperty('top');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.paddingTop = '0';
+			code.style.top = ((codePadding.value) ? codePadding.value : 0) + 'px';
+			code.style.left = '0';
+			code.style.right = '0';
+			code.style.margin = '0 auto';
 			break;
 		case 'Middle Bottom':
-			pre.style.removeProperty('top');
-			pre.style.removeProperty('transform');
-			pre.style.top = '00';
-			pre.style.bottom = '0';
-			pre.style.left = '0';
-			pre.style.right = '0';
-			pre.style.margin = '0 auto';
+			code.style.removeProperty('top');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			code.style.left = '0';
+			code.style.right = '0';
+			code.style.margin = '0 auto';
 			break;
 		case 'Top Left':
-			pre.style.removeProperty('right');
-			pre.style.removeProperty('bottom');
-			pre.style.removeProperty('transform');
-			pre.style.paddingTop = '0';
-			pre.style.top = codePadding.value + 'px';
-			pre.style.left = '0';
+			code.style.removeProperty('top');
+			code.style.removeProperty('right');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
+			code.style.left = '0';
 			break;
 		case 'Top Right':
-			pre.style.removeProperty('left');
-			pre.style.removeProperty('bottom');
-			pre.style.removeProperty('transform');
-			pre.style.paddingTop = '0';
-			pre.style.top = codePadding.value + 'px';
-			pre.style.right = '0';
+			code.style.removeProperty('top');
+			code.style.removeProperty('left');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
+			code.style.right = '0';
 			break;
 		case 'Bottom Right':
-			pre.style.removeProperty('left');
-			pre.style.removeProperty('top');
-			pre.style.removeProperty('transform');
-			pre.style.bottom = '0';
-			pre.style.right = '0';
+			code.style.removeProperty('left');
+			code.style.removeProperty('top');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			code.style.right = '0';
 			break;
 		case 'Bottom Left':
-			pre.style.removeProperty('right');
-			pre.style.removeProperty('top');
-			pre.style.removeProperty('transform');
-			pre.style.bottom = '0';
-			pre.style.left = '0';
+			code.style.removeProperty('right');
+			code.style.removeProperty('top');
+			code.style.removeProperty('bottom');
+			code.style.removeProperty('transform');
+			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			code.style.left = '0';
 			break;
 		}
 	});
