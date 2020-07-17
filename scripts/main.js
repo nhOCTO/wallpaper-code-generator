@@ -206,7 +206,7 @@ $(document).ready(function() {
 			code.style.removeProperty('top');
 			code.style.removeProperty('bottom');
 			code.style.removeProperty('transform');
-			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
 			code.style.left = '0';
 			code.style.right = '0';
 			code.style.margin = '0 auto';
@@ -232,7 +232,7 @@ $(document).ready(function() {
 			code.style.removeProperty('top');
 			code.style.removeProperty('bottom');
 			code.style.removeProperty('transform');
-			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
 			code.style.right = '0';
 			break;
 		case 'Bottom Left':
@@ -240,7 +240,8 @@ $(document).ready(function() {
 			code.style.removeProperty('top');
 			code.style.removeProperty('bottom');
 			code.style.removeProperty('transform');
-			code.style.bottom = ((codePadding.value) ? codeHeight / 2 : 0 + codeHeight / 2) + 'px';
+			console.log(codeHeight);
+			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
 			code.style.left = '0';
 			break;
 		}
