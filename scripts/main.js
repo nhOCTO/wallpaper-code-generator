@@ -61,20 +61,24 @@ const codeWidth = document.getElementById('codeWidth');
 const lineHeight = document.getElementById('lineHeight');
 const letterSpacing = document.getElementById('letterSpacing');
 const codePadding = document.getElementById('codePadding');
-const toggleWhitespace = document.getElementById('toggleWhitespace');
+const toggleWhitespaceButton = document.getElementById('toggleWhitespace');
 const toggleAutoWidth = document.getElementById('toggleAutoWidth');
 toggleAutoWidth.checked = true;
 codeWidth.disabled = true;
 
-toggleWhitespace.checked = true;
+toggleWhitespaceButton.checked = true;
 
 let codeWithoutWhitespace;
 let codeWithWhitespace;
 
-toggleWhitespace.addEventListener('change', (event) => {
+toggleWhitespaceButton.addEventListener('change', () => {
+	toggleWhitespace();
+});
+
+function toggleWhitespace() {
 	let codeText = code.innerHTML;
 
-	if (event.target.checked) {
+	if (toggleWhitespaceButton.checked) {
 		codeText = codeWithWhitespace;
 	} else {
 		codeText = codeWithoutWhitespace;
@@ -82,7 +86,7 @@ toggleWhitespace.addEventListener('change', (event) => {
 
 	code.innerHTML = codeText;
 	hljs.highlightBlock(code);
-});
+}
 
 toggleAutoWidth.addEventListener('change', () => {
 	codeWidth.disabled = toggleAutoWidth.checked;
@@ -272,13 +276,19 @@ textarea.addEventListener('change', () => {
 
 	pre = document.getElementsByClassName('hljs')[0];
 	pre.style.background = 'rgba(255, 255, 255, 0)';
-	toggleDropdowns(true);
+	if (code.textContent.length == 0) {
+		toggleDropdowns(false);
+	} else {
+		toggleDropdowns(true);
+	}
 
 	if (currentFont != undefined) {
 		code.style.fontFamily = currentFont;
 
 		toggleCodeStyles();
 	}
+
+	toggleWhitespace();
 });
 
 function toggleDropdowns(toggle) {
