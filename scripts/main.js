@@ -62,6 +62,10 @@ const lineHeight = document.getElementById('lineHeight');
 const letterSpacing = document.getElementById('letterSpacing');
 const codePadding = document.getElementById('codePadding');
 const toggleWhitespace = document.getElementById('toggleWhitespace');
+const toggleAutoWidth = document.getElementById('toggleAutoWidth');
+toggleAutoWidth.checked = true;
+codeWidth.disabled = true;
+
 toggleWhitespace.checked = true;
 
 let codeWithoutWhitespace;
@@ -78,6 +82,11 @@ toggleWhitespace.addEventListener('change', (event) => {
 
 	code.innerHTML = codeText;
 	hljs.highlightBlock(code);
+});
+
+toggleAutoWidth.addEventListener('change', () => {
+	codeWidth.disabled = toggleAutoWidth.checked;
+	code.style.width = 'max-content';
 });
 
 backgroundColor.addEventListener('input', () => {
