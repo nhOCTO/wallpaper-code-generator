@@ -264,7 +264,7 @@ textarea.addEventListener('change', () => {
 	hljs.highlightBlock(code);
 	codeWithoutWhitespace = code.innerHTML;
 
-	textAreaCode = textAreaCode.split(' ').join('<i class="fas fa-circle"></i>');
+	textAreaCode = textAreaCode.split(' ').join('<span class="spaceDot">·</span>');
 	code.innerHTML = textAreaCode;
 	hljs.highlightBlock(code);
 	codeWithWhitespace = code.innerHTML;
