@@ -64,6 +64,7 @@ const codePadding = document.getElementById('codePadding');
 const toggleWhitespaceButton = document.getElementById('toggleWhitespace');
 const toggleAutoWidth = document.getElementById('toggleAutoWidth');
 toggleAutoWidth.checked = true;
+code.style.width = 'max-content';
 codeWidth.disabled = true;
 
 toggleWhitespaceButton.checked = true;
