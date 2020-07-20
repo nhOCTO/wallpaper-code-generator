@@ -138,6 +138,31 @@ codePadding.addEventListener('input', () => {
 // ******************************
 const boldButton = document.getElementsByClassName('fa-bold')[0];
 const italicButton = document.getElementsByClassName('fa-italic')[0];
+const leftAlignButton = document.getElementsByClassName('left-align')[0];
+const centerAlignButton = document.getElementsByClassName('center-align')[0];
+const rightAlignButton = document.getElementsByClassName('right-align')[0];
+
+leftAlignButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	rightAlignButton.classList.remove('active');
+	centerAlignButton.classList.remove('active');
+
+	code.style.textAlign = 'left';
+});
+rightAlignButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	leftAlignButton.classList.remove('active');
+	centerAlignButton.classList.remove('active');
+
+	code.style.textAlign = 'right';
+});
+centerAlignButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	leftAlignButton.classList.remove('active');
+	rightAlignButton.classList.remove('active');
+
+	code.style.textAlign = 'center';
+});
 
 boldButton.addEventListener('click', function() {
 	this.classList.toggle('active');
