@@ -5,6 +5,7 @@ const textarea = document.getElementsByTagName('textarea')[0];
 let pre;
 const code = document.getElementsByClassName('wallpaper-code')[0];
 const codeTheme = document.getElementsByClassName('code-theme')[0];
+const dropdownCodeTheme = document.getElementsByClassName('dropdown-code-theme')[0].children[0];
 const downloadButton = document.getElementsByClassName('download-button')[0];
 const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
 
@@ -63,29 +64,42 @@ const letterSpacing = document.getElementById('letterSpacing');
 const codePadding = document.getElementById('codePadding');
 const toggleWhitespaceButton = document.getElementById('toggleWhitespace');
 const toggleAutoWidth = document.getElementById('toggleAutoWidth');
+const toggleThemingButton = document.getElementById('toggleTheming');
+toggleThemingButton.checked = true;
+codeWidth.disabled = !toggleAutoWidth.checked;
+
 toggleAutoWidth.checked = true;
 code.style.width = 'max-content';
-codeWidth.disabled = true;
 
 toggleWhitespaceButton.checked = true;
 
-let codeWithoutWhitespace;
-let codeWithWhitespace;
+const codeObj = {};
 
 toggleWhitespaceButton.addEventListener('change', () => {
-	toggleWhitespace();
+	updateCode();
 });
 
-function toggleWhitespace() {
+toggleThemingButton.addEventListener('change', () => {
+	if (toggleThemingButton.checked) {
+		codeTheme.disabled = false;
+		dropdownCodeTheme.disabled = false;
+	} else {
+		codeTheme.disabled = true;
+		dropdownCodeTheme.disabled = true;
+	}
+});
+
+function updateCode() {
 	let codeText = code.innerHTML;
 
 	if (toggleWhitespaceButton.checked) {
-		codeText = codeWithWhitespace;
+		codeText = codeObj.withWhitespace;
 	} else {
-		codeText = codeWithoutWhitespace;
+		codeText = codeObj.withoutWhitespace;
 	}
 
 	code.innerHTML = codeText;
+
 	hljs.highlightBlock(code);
 }
 
@@ -267,21 +281,31 @@ $(window).resize(function() {
 textarea.addEventListener('change', () => {
 	let textAreaCode = textarea.value;
 	code.innerHTML = textAreaCode;
-	hljs.highlightBlock(code);
-	codeWithoutWhitespace = code.innerHTML;
+	codeObj.withoutHighlight = textAreaCode;
+	if (toggleThemingButton.checked) {
+		hljs.highlightBlock(code);
+	}
+
+	codeObj.withoutWhitespace = code.innerHTML;
 
 	textAreaCode = textAreaCode.split(' ').join('<span class="spaceDot">·</span>');
 	code.innerHTML = textAreaCode;
-	hljs.highlightBlock(code);
-	codeWithWhitespace = code.innerHTML;
+	if (toggleThemingButton.checked) {
+		hljs.highlightBlock(code);
+	}
+	codeObj.withWhitespace = code.innerHTML;
 
 	pre = document.getElementsByClassName('hljs')[0];
+
+	// Toggling dropdown items
+	// *****************
 	pre.style.background = 'rgba(255, 255, 255, 0)';
 	if (code.textContent.length == 0) {
 		toggleDropdowns(false);
 	} else {
 		toggleDropdowns(true);
 	}
+	// *****************
 
 	if (currentFont != undefined) {
 		code.style.fontFamily = currentFont;
@@ -289,7 +313,7 @@ textarea.addEventListener('change', () => {
 		toggleCodeStyles();
 	}
 
-	toggleWhitespace();
+	updateCode();
 });
 
 function toggleDropdowns(toggle) {
