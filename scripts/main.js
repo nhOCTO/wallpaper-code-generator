@@ -141,6 +141,43 @@ const italicButton = document.getElementsByClassName('fa-italic')[0];
 const leftAlignButton = document.getElementsByClassName('left-align')[0];
 const centerAlignButton = document.getElementsByClassName('center-align')[0];
 const rightAlignButton = document.getElementsByClassName('right-align')[0];
+const uppercaseButton = document.getElementsByClassName('uppercase')[0];
+const lowercaseButton = document.getElementsByClassName('lowercase')[0];
+const capitalizeButton = document.getElementsByClassName('capitalize')[0];
+const noTransformationButton = document.getElementsByClassName('noTransformation')[0];
+
+noTransformationButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	lowercaseButton.classList.remove('active');
+	uppercaseButton.classList.remove('active');
+	capitalizeButton.classList.remove('active');
+
+	code.style.textTransform = 'none';
+});
+uppercaseButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	lowercaseButton.classList.remove('active');
+	noTransformationButton.classList.remove('active');
+	capitalizeButton.classList.remove('active');
+
+	code.style.textTransform = 'uppercase';
+});
+lowercaseButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	uppercaseButton.classList.remove('active');
+	noTransformationButton.classList.remove('active');
+	capitalizeButton.classList.remove('active');
+
+	code.style.textTransform = 'lowercase';
+});
+capitalizeButton.addEventListener('click', function() {
+	this.classList.toggle('active');
+	uppercaseButton.classList.remove('active');
+	noTransformationButton.classList.remove('active');
+	lowercaseButton.classList.remove('active');
+
+	code.style.textTransform = 'capitalize';
+});
 
 leftAlignButton.addEventListener('click', function() {
 	this.classList.toggle('active');
