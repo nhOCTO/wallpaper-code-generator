@@ -58,6 +58,7 @@ wallpaper.addEventListener('mouseleave', () => {
 // Configuration panel references
 // ******************************
 const backgroundColor = document.getElementById('backgroundColor');
+const textColor = document.getElementById('textColor');
 const codeWidth = document.getElementById('codeWidth');
 const lineHeight = document.getElementById('lineHeight');
 const letterSpacing = document.getElementById('letterSpacing');
@@ -83,9 +84,13 @@ toggleThemingButton.addEventListener('change', () => {
 	if (toggleThemingButton.checked) {
 		codeTheme.disabled = false;
 		dropdownCodeTheme.disabled = false;
+		code.style.removeProperty('color');
 	} else {
 		codeTheme.disabled = true;
 		dropdownCodeTheme.disabled = true;
+
+		const hex = textColor.value;
+		code.style.color = hex;
 	}
 });
 
@@ -111,6 +116,13 @@ toggleAutoWidth.addEventListener('change', () => {
 backgroundColor.addEventListener('input', () => {
 	const hex = backgroundColor.value;
 	wallpaper.style.backgroundColor = hex;
+});
+
+textColor.addEventListener('input', () => {
+	if (toggleThemingButton.checked == false) {
+		const hex = textColor.value;
+		code.style.color = hex;
+	}
 });
 
 codeWidth.addEventListener('input', () => {
