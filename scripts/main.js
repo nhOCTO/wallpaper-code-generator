@@ -115,7 +115,7 @@ toggleAutoWidth.addEventListener('change', () => {
 
 backgroundColor.addEventListener('input', () => {
 	const hex = backgroundColor.value;
-	wallpaper.style.backgroundColor = hex;
+	wallpaper.style.background = hex;
 });
 
 textColor.addEventListener('input', () => {
