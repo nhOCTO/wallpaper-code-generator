@@ -110,7 +110,12 @@ function updateCode() {
 
 toggleAutoWidth.addEventListener('change', () => {
 	codeWidth.disabled = toggleAutoWidth.checked;
-	code.style.width = 'max-content';
+	if (!toggleAutoWidth.checked) {
+		code.style.position = 'absolute';
+		pre.style.width = codeWidth.value + 'px';
+	} else {
+		code.style.width = 'max-content';
+	}
 });
 
 backgroundColor.addEventListener('input', () => {
@@ -238,22 +243,50 @@ function toggleCodeStyles() {
 
 let currentFont;
 $(document).ready(function() {
-	$('.dropdown-item.theme').on('click', function() {
+	$('.dropdown-item.theme').on('keydown click', function(e) {
+		if (e.keyCode == 38) {
+		   $(this).prev().focus();
+		}    
+		if (e.keyCode == 40) {
+		   $(this).next().focus();
+		}
+
 		codeTheme.href = 'themes/' + this.textContent + '.css';
 	});
 
-	$('.dropdown-item.font').on('click', function() {
+	$('.dropdown-item.font').on('keydown click', function(e){
+		if (e.keyCode == 38) {
+		   $(this).prev().focus();
+		}    
+		if (e.keyCode == 40) {
+		   $(this).next().focus();
+		}
+
 		currentFont = this.textContent;
 		code.style.fontFamily = this.textContent;
 
 		toggleCodeStyles();
 	});
 
-	$('.dropdown-item.font-size').on('click', function() {
+	$('.dropdown-item.font-size').on('keydown click', function(e) {
+		if (e.keyCode == 38) {
+		   $(this).prev().focus();
+		}    
+		if (e.keyCode == 40) {
+		   $(this).next().focus();
+		}
+
 		pre.style.fontSize = this.textContent;
 	});
 
-	$('.dropdown-item.code-position').on('click', function() {
+	$('.dropdown-item.code-position').on('keydown click', function(e) {
+		if (e.keyCode == 38) {
+		   $(this).prev().focus();
+		}    
+		if (e.keyCode == 40) {
+		   $(this).next().focus();
+		}
+
 		const position = this.textContent;
 
 		code.style.position = 'absolute';
@@ -352,7 +385,7 @@ $(window).resize(function() {
 	repositionWallpaper();
 });
 
-textarea.addEventListener('change', () => {
+textarea.addEventListener('input', () => {
 	let textAreaCode = textarea.value;
 	code.innerHTML = textAreaCode;
 	codeObj.withoutHighlight = textAreaCode;
