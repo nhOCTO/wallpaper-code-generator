@@ -45,7 +45,6 @@ downloadButton.addEventListener('click', () => {
 });
 
 saveButton.addEventListener('click', () => {
-	console.log($('.dropdown-code-position').text());
 	const config = {
 		backgroundColor: backgroundColor.value,
 		textColor: textColor.value,
@@ -127,7 +126,6 @@ function loadConfig(config) {
 
 	toggleCodeStyles();
 
-	console.log(config);
 	if (config.bold) {
 		$(boldButton).addClass('active');
 		code.style.fontWeight = 'bold';
@@ -501,7 +499,6 @@ function updatePosition() {
 		code.style.removeProperty('top');
 		code.style.removeProperty('bottom');
 		code.style.removeProperty('transform');
-		console.log(codeHeight);
 		code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
 		code.style.left = '0';
 		break;
