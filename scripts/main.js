@@ -7,7 +7,11 @@ const code = document.getElementsByClassName('wallpaper-code')[0];
 const codeTheme = document.getElementsByClassName('code-theme')[0];
 const dropdownCodeTheme = document.getElementsByClassName('dropdown-code-theme')[0].children[0];
 const downloadButton = document.getElementsByClassName('download-button')[0];
+const uploadButton = document.getElementsByClassName('upload-button')[0];
+const saveButton = document.getElementsByClassName('save-button')[0];
 const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+
+let currentPosition;
 
 const focusedValue = 1;
 const notFocusedValue = 0.3;
@@ -39,6 +43,131 @@ downloadButton.addEventListener('click', () => {
 			wallpaper.style.opacity = notFocusedValue;
 		});
 });
+
+saveButton.addEventListener('click', () => {
+	console.log($('.dropdown-code-position').text());
+	const config = {
+		backgroundColor: backgroundColor.value,
+		textColor: textColor.value,
+		codeWidth: codeWidth.value,
+		lineHeight: lineHeight.value,
+		letterSpacing: letterSpacing.value,
+		codePadding: codePadding.value,
+		whitespace: toggleWhitespaceButton.checked,
+		toggleAutoWidth: toggleAutoWidth.checked,
+		toggleTheming: toggleThemingButton.checked,
+		codeTheme: codeTheme.href,
+		fontName: code.style.fontFamily,
+		fontSize: pre ? pre.style.fontSize : '',
+		position: currentPosition,
+		code: textarea.value,
+		bold: $(boldButton).hasClass('active'),
+		italic: $(italicButton).hasClass('active'),
+		textAlignLeft: $(leftAlignButton).hasClass('active'),
+		textAlignMiddle: $(centerAlignButton).hasClass('active'),
+		textAlignRight: $(rightAlignButton).hasClass('active'),
+		transform: $(noTransformationButton).hasClass('active'),
+		uppercase: $(uppercaseButton).hasClass('active'),
+		lowercase: $(lowercaseButton).hasClass('active'),
+		capitalize: $(capitalizeButton).hasClass('active'),
+	};
+
+	const data = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(config));
+
+	const a = document.createElement('a');
+	a.setAttribute('download', 'config.json');
+	a.setAttribute('href', data);
+	a.click();
+});
+
+uploadButton.addEventListener('change', (event) => {
+	const file = event.target.files[0];
+	let config;
+
+	if (file) {
+		const reader = new FileReader();
+		reader.readAsText(file, 'UTF-8');
+		reader.onload = (e) => {
+			config = JSON.parse(e.target.result);
+			loadConfig(config);
+		};
+	}
+});
+
+function loadConfig(config) {
+	$(textarea).val(config.code);
+	code.innerHTML = config.code;
+
+	wallpaper.style.background = config.backgroundColor;
+	$(backgroundColor).val(config.backgroundColor);
+
+	code.style.color = config.textColor;
+	$(textColor).val(config.textColor);
+
+	toggleDropdowns(true);
+	// updateCode();
+
+	if (pre) {
+		pre.style.width = config.codeWidth + 'px';
+		pre.style.lineHeight = config.lineHeight + 'px';
+		pre.style.letterSpacing = config.letterSpacing + 'px';
+		pre.style.padding = config.codePadding + 'px';
+
+		pre.style.fontSize = config.fontSize;
+	}
+
+	toggleWhitespaceButton.checked = config.whitespace;
+	toggleAutoWidth.checked = config.toggleAutoWidth;
+	toggleThemingButton.checked = config.toggleTheming;
+	codeTheme.href = config.codeTheme;
+
+	currentFont = config.fontName;
+	code.style.fontFamily = currentFont;
+	currentPosition = config.position;
+
+	toggleCodeStyles();
+
+	console.log(config);
+	if (config.bold) {
+		$(boldButton).addClass('active');
+		code.style.fontWeight = 'bold';
+	}
+	if (config.italic) {
+		$(italicButton).addClass('active');
+		code.style.fontStyle = 'italic';
+	}
+	if (config.textAlignLeft) {
+		$(leftAlignButton).addClass('active');
+		code.style.textAlign = 'left';
+	}
+	if (config.textAlignMiddle) {
+		$(centerAlignButton).addClass('active');
+		code.style.textAlign = 'center';
+	}
+	if (config.textAlignRight) {
+		$(rightAlignButton).addClass('active');
+		code.style.textAlign = 'right';
+	}
+	if (config.transform) {
+		$(noTransformationButton).addClass('active');
+		code.style.textTransform = 'none';
+	}
+	if (config.uppercase) {
+		$(uppercaseButton).addClass('active');
+		code.style.textTransform = 'uppercase';
+	}
+	if (config.lowercase) {
+		$(lowercaseButton).addClass('active');
+		code.style.textTransform = 'lowercase';
+	}
+	if (config.capitalize) {
+		$(capitalizeButton).addClass('active');
+		code.style.textTransform = 'capitalize';
+	}
+
+	updatePosition();
+	toggleCodeStyles();
+}
 
 // ******************************
 // UI interactions
@@ -245,21 +374,21 @@ let currentFont;
 $(document).ready(function() {
 	$('.dropdown-item.theme').on('keydown click', function(e) {
 		if (e.keyCode == 38) {
-		   $(this).prev().focus();
-		}    
+			$(this).prev().focus();
+		}
 		if (e.keyCode == 40) {
-		   $(this).next().focus();
+			$(this).next().focus();
 		}
 
 		codeTheme.href = 'themes/' + this.textContent + '.css';
 	});
 
-	$('.dropdown-item.font').on('keydown click', function(e){
+	$('.dropdown-item.font').on('keydown click', function(e) {
 		if (e.keyCode == 38) {
-		   $(this).prev().focus();
-		}    
+			$(this).prev().focus();
+		}
 		if (e.keyCode == 40) {
-		   $(this).next().focus();
+			$(this).next().focus();
 		}
 
 		currentFont = this.textContent;
@@ -270,10 +399,10 @@ $(document).ready(function() {
 
 	$('.dropdown-item.font-size').on('keydown click', function(e) {
 		if (e.keyCode == 38) {
-		   $(this).prev().focus();
-		}    
+			$(this).prev().focus();
+		}
 		if (e.keyCode == 40) {
-		   $(this).next().focus();
+			$(this).next().focus();
 		}
 
 		pre.style.fontSize = this.textContent;
@@ -281,98 +410,103 @@ $(document).ready(function() {
 
 	$('.dropdown-item.code-position').on('keydown click', function(e) {
 		if (e.keyCode == 38) {
-		   $(this).prev().focus();
-		}    
+			$(this).prev().focus();
+		}
 		if (e.keyCode == 40) {
-		   $(this).next().focus();
+			$(this).next().focus();
 		}
 
 		const position = this.textContent;
+		currentPosition = position;
 
-		code.style.position = 'absolute';
-		const codeHeightString = getComputedStyle(code).height;
-		const codeHeight = codeHeightString.substring(0, codeHeightString.length - 2);
-
-		switch(position) {
-		case 'Middle':
-			code.style.removeProperty('bottom');
-			code.style.top = '50%';
-			code.style.transform = 'translateY(-50%)';
-			code.style.left = '0';
-			code.style.right = '0';
-			code.style.margin = '0 auto';
-			break;
-		case 'Middle Left':
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('right');
-			code.style.top = '50%';
-			code.style.transform = 'translateY(-50%)';
-			code.style.left = ((codePadding.value) ? codePadding.value : 0) + 'px';
-			code.style.margin = '0 auto';
-			break;
-		case 'Middle Right':
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('left');
-			code.style.top = '50%';
-			code.style.transform = 'translateY(-50%)';
-			code.style.right = ((codePadding.value) ? codePadding.value : 0) + 'px';
-			code.style.margin = '0 auto';
-			break;
-		case 'Middle Top':
-			code.style.removeProperty('top');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			code.style.paddingTop = '0';
-			code.style.top = ((codePadding.value) ? codePadding.value : 0) + 'px';
-			code.style.left = '0';
-			code.style.right = '0';
-			code.style.margin = '0 auto';
-			break;
-		case 'Middle Bottom':
-			code.style.removeProperty('top');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
-			code.style.left = '0';
-			code.style.right = '0';
-			code.style.margin = '0 auto';
-			break;
-		case 'Top Left':
-			code.style.removeProperty('top');
-			code.style.removeProperty('right');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
-			code.style.left = '0';
-			break;
-		case 'Top Right':
-			code.style.removeProperty('top');
-			code.style.removeProperty('left');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
-			code.style.right = '0';
-			break;
-		case 'Bottom Right':
-			code.style.removeProperty('left');
-			code.style.removeProperty('top');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
-			code.style.right = '0';
-			break;
-		case 'Bottom Left':
-			code.style.removeProperty('right');
-			code.style.removeProperty('top');
-			code.style.removeProperty('bottom');
-			code.style.removeProperty('transform');
-			console.log(codeHeight);
-			code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
-			code.style.left = '0';
-			break;
-		}
+		updatePosition();
 	});
 });
+
+function updatePosition() {
+	code.style.position = 'absolute';
+	const codeHeightString = getComputedStyle(code).height;
+	const codeHeight = codeHeightString.substring(0, codeHeightString.length - 2);
+
+	switch(currentPosition) {
+	case 'Middle':
+		code.style.removeProperty('bottom');
+		code.style.top = '50%';
+		code.style.transform = 'translateY(-50%)';
+		code.style.left = '0';
+		code.style.right = '0';
+		code.style.margin = '0 auto';
+		break;
+	case 'Middle Left':
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('right');
+		code.style.top = '50%';
+		code.style.transform = 'translateY(-50%)';
+		code.style.left = ((codePadding.value) ? codePadding.value : 0) + 'px';
+		code.style.margin = '0 auto';
+		break;
+	case 'Middle Right':
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('left');
+		code.style.top = '50%';
+		code.style.transform = 'translateY(-50%)';
+		code.style.right = ((codePadding.value) ? codePadding.value : 0) + 'px';
+		code.style.margin = '0 auto';
+		break;
+	case 'Middle Top':
+		code.style.removeProperty('top');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		code.style.paddingTop = '0';
+		code.style.top = ((codePadding.value) ? codePadding.value : 0) + 'px';
+		code.style.left = '0';
+		code.style.right = '0';
+		code.style.margin = '0 auto';
+		break;
+	case 'Middle Bottom':
+		code.style.removeProperty('top');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
+		code.style.left = '0';
+		code.style.right = '0';
+		code.style.margin = '0 auto';
+		break;
+	case 'Top Left':
+		code.style.removeProperty('top');
+		code.style.removeProperty('right');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
+		code.style.left = '0';
+		break;
+	case 'Top Right':
+		code.style.removeProperty('top');
+		code.style.removeProperty('left');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		code.style.top = ((codePadding.value) ? parseInt(codePadding.value) + codeHeight / 2 : 0 + codeHeight / 2);
+		code.style.right = '0';
+		break;
+	case 'Bottom Right':
+		code.style.removeProperty('left');
+		code.style.removeProperty('top');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
+		code.style.right = '0';
+		break;
+	case 'Bottom Left':
+		code.style.removeProperty('right');
+		code.style.removeProperty('top');
+		code.style.removeProperty('bottom');
+		code.style.removeProperty('transform');
+		console.log(codeHeight);
+		code.style.bottom = ((codePadding.value) ? parseInt(codePadding.value) : 0) + 'px';
+		code.style.left = '0';
+		break;
+	}
+}
 
 function repositionWallpaper() {
 	wallpaper.style.width = window.screen.width + 'px';
