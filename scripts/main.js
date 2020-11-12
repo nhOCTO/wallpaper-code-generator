@@ -106,6 +106,7 @@ function loadConfig(config) {
 	toggleDropdowns(true);
 	// updateCode();
 
+	pre = document.getElementsByClassName('hljs')[0];
 	if (pre) {
 		pre.style.width = config.codeWidth + 'px';
 		pre.style.lineHeight = config.lineHeight + 'px';
@@ -165,6 +166,7 @@ function loadConfig(config) {
 
 	updatePosition();
 	toggleCodeStyles();
+	refreshCode();
 }
 
 // ******************************
@@ -371,50 +373,63 @@ function toggleCodeStyles() {
 let currentFont;
 $(document).ready(function() {
 	$('.dropdown-item.theme').on('keydown click', function(e) {
+		let new_item;
 		if (e.keyCode == 38) {
-			$(this).prev().focus();
+			new_item = $(this).prev();
+		} else if (e.keyCode == 40) {
+			new_item = $(this).next();
+		} else {
+			new_item = $(this);
 		}
-		if (e.keyCode == 40) {
-			$(this).next().focus();
-		}
+		new_item.focus();
 
-		codeTheme.href = 'themes/' + this.textContent + '.css';
+		codeTheme.href = 'themes/' + new_item.html() + '.css';
 	});
 
 	$('.dropdown-item.font').on('keydown click', function(e) {
+		let new_item;
 		if (e.keyCode == 38) {
-			$(this).prev().focus();
+			new_item = $(this).prev();
+		} else if (e.keyCode == 40) {
+			new_item = $(this).next();
+		} else {
+			new_item = $(this);
 		}
-		if (e.keyCode == 40) {
-			$(this).next().focus();
-		}
+		new_item.focus();
 
-		currentFont = this.textContent;
-		code.style.fontFamily = this.textContent;
+		currentFont = new_item.html();
+		code.style.fontFamily = new_item.html();
 
 		toggleCodeStyles();
 	});
 
 	$('.dropdown-item.font-size').on('keydown click', function(e) {
+		let new_item;
 		if (e.keyCode == 38) {
-			$(this).prev().focus();
+			new_item = $(this).prev();
+		} else if (e.keyCode == 40) {
+			new_item = $(this).next();
+		} else {
+			new_item = $(this);
 		}
-		if (e.keyCode == 40) {
-			$(this).next().focus();
-		}
+		new_item.focus();
 
-		pre.style.fontSize = this.textContent;
+		pre.style.fontSize = new_item.html();
 	});
 
 	$('.dropdown-item.code-position').on('keydown click', function(e) {
+		let new_item;
 		if (e.keyCode == 38) {
-			$(this).prev().focus();
-		}
-		if (e.keyCode == 40) {
-			$(this).next().focus();
+			new_item = $(this).prev();
+		} else if (e.keyCode == 40) {
+			new_item = $(this).next();
+		} else {
+			new_item = $(this);
 		}
 
-		const position = this.textContent;
+		new_item.focus();
+
+		const position = new_item.html();
 		currentPosition = position;
 
 		updatePosition();
@@ -517,6 +532,10 @@ $(window).resize(function() {
 });
 
 textarea.addEventListener('input', () => {
+	refreshCode();
+});
+
+function refreshCode() {
 	let textAreaCode = textarea.value;
 	code.innerHTML = textAreaCode;
 	codeObj.withoutHighlight = textAreaCode;
@@ -552,7 +571,7 @@ textarea.addEventListener('input', () => {
 	}
 
 	updateCode();
-});
+}
 
 function toggleDropdowns(toggle) {
 	for (let i = 0; i < dropdownButtons.length; i++) {
